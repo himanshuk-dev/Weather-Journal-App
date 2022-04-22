@@ -11,7 +11,8 @@ Lavender Web: #D8D8F6
 body{
     display: grid;
     /* row-gap: 1%; */
-    background: #2C2C34;
+    background: url(images/background1.jpg);
+    background-size: contain;
     color: #D8D8F6;
     font-size: 3em;
 }
@@ -20,17 +21,20 @@ body{
 label{
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     display:block;
+    margin: 1%;
+    text-align:left;
     font-size: 37px;
 }
 
 input{
-    display: block;
+    display: inline-block;
+    align-content: right;
     padding: 15px;
     margin: 15px;
     border: none;
     font-size: 32px;
     height: 40px;
-    width: 300px
+    width: 300px;
 }
 
 input:focus{
@@ -38,10 +42,27 @@ input:focus{
 }
 
 button{
-    display: block;
+    display:inline-block;
     padding: 1%;
     border-radius: 100%;
     font-size: 18px;
+    text-align: right;
+    background: #B18FCF;
+}
+
+textarea{
+    display: inline-block;
+    align-content: right;
+    padding: 15px;
+    margin: 15px;
+    font-size: 24px;
+    border: none;
+    height: 160px;
+    width:700px;
+}
+
+textarea:focus{
+    outline: none;
 }
 
 /* App header---------------------- */
@@ -57,9 +78,10 @@ button{
 
 /* Location search area------------ */
 .location{
-    display: block;
+    display: inline-block;
     padding: 3%;
     margin: 50px;
+    text-align: center;
     background: #978897;
     color: #2C2C34;
 }
@@ -78,3 +100,11 @@ button{
 
 
 /* Recent search------------------ */
+.recent{
+    display: block;
+    background: #D8D8F6;
+    color: #2C2C34;
+    padding: 3%;
+    margin: 50px;
+    margin-top: auto;
+}
