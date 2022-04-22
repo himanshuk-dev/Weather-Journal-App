@@ -5,6 +5,9 @@ Burnished Brown: #A37B73
 Hellotrope Gray: #978897
 African Violet: #B18FCF
 Lavender Web: #D8D8F6
+Light Gray: #CFCBCA
+Gainsboro: #D8DDDE
+
 */
 
 /* Global Style-------------------- */
@@ -44,10 +47,16 @@ input:focus{
 button{
     display:inline-block;
     padding: 1%;
-    border-radius: 100%;
-    font-size: 18px;
-    text-align: right;
-    background: #B18FCF;
+    /* border-radius: 100%; */
+    width: 90px;
+    font-size: 25px;
+    font-weight:bold;
+    text-align: center;
+    background: #CFCBCA;
+}
+
+button:hover{
+    background: #D8DDDE;
 }
 
 textarea{
@@ -94,7 +103,7 @@ textarea:focus{
     color: #2C2C34;
     padding: 3%;
     margin: 50px;
-    margin-top: auto;
+    margin-top: 0;
     text-align: right;
 }
 
