@@ -18,9 +18,9 @@ const getData = async (baseURL, location, key)=>{
     const res = await fetch(baseURL+location+key)
     try {
   
-      const appData = await res.json();
-      console.log(appData)
-      return appData;
+      const Data = await res.json();
+      console.log(Data)
+      return Data;
     }  catch(error) {
       console.log("error", error);
       // appropriately handle the error
@@ -28,7 +28,7 @@ const getData = async (baseURL, location, key)=>{
   }
 
 /* Function to POST data */
-const postData = async (url = '', appData = {}) =>{
+const postData = async (url = '', Data = {}) =>{
   const res = await fetch(url, {
     method: 'POST',
     credentials: 'same-origin',
@@ -36,9 +36,9 @@ const postData = async (url = '', appData = {}) =>{
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(
-      temperature: appData.temperature, 
-      date: appData.date, 
-      comments: appData.comments
+      temperature = Data.temperature, 
+      date= Data.date, 
+      comments= Data.comments
     )
   });
   try {
@@ -52,5 +52,17 @@ const postData = async (url = '', appData = {}) =>{
   }
 }
 
-
 /* Function to GET Project Data */
+const updateUI = async () => {
+const request = await fetch('/all')
+try{
+  const allData = await request. json()
+  console. log(allData);
+  document.getElementById('date').innerHTML=allData[0].date;
+  document.getElementById('temperature').innerHTML=allData[0].temperature;
+  document.getElementById('comments'). innerHTML = allData[0]. comments;
+
+  }catch(error){
+    console. log("error", error)
+  }
+}

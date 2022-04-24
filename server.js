@@ -29,17 +29,24 @@ function listening(){
 }
 
 // Capture weather data
-const appData = []
-app.post('/addEntry', addEntry)
+app.get('/all',getData);
+
+function getData(req,res) {
+  res.send(projectData);
+  projectData=[];
+}
+
+// Post weather data
+app.post('/add', addEntry)
 
 function addEntry(req,res){
 
     newEntry = {
-      temperature: req.body.temperature,
       date: req.body.date,
+      temperature: req.body.temperature,
       comments: req.body.comments
     }
   
-    addEntry.push(newEntry)
+    projectData.push(newEntry)
     console.log(addEntry)
   }
