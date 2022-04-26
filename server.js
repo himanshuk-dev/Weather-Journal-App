@@ -28,7 +28,7 @@ function listening(){
     console.log(`running on localhost: ${port}`);
 }
 
-// Capture weather data
+// Capture weather data (Get Route I)
 app.get('/all',getData);
 
 function getData(req,res) {
@@ -37,7 +37,7 @@ function getData(req,res) {
 }
 
 // Post weather data
-app.post('/add', addEntry)
+app.post('/projectData', addEntry)
 
 function addEntry(req,res){
 

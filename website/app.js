@@ -1,39 +1,39 @@
 // Create a new date instance dynamically with JS
 let d = new Date();
-// let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
+let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
 
 
 // Personal API Key for OpenWeatherMap API
 let baseURL = 'api.openweathermap.org/data/2.5/weather/?zip=';
-let apiKey = '&appID=76aa91139c7537d1992cc3e86268bd28';
+const apiKey = '&appID=76aa91139c7537d1992cc3e86268bd28';
 
 // Event listener to add function to existing HTML DOM element
-document.getElementById('go').addEventListener('click', taskToPerform);
+document.getElementById("generate").addEventListener('click', taskToPerform);
 
 /* Function called by event listener */
 function taskToPerform(e){
-  const location =  document.getElementById('zipCode').value;
+  const location =  document.getElementById('zip').value;
   const country =  document.getElementById('country').value;
-  const comments =  document.getElementById('comments').value;
+  const comments =  document.getElementById('feelings').value;
 
-  getData(baseURL,location, apiKey)
+  getData(baseURL,location,country, apiKey)
 
     .then(function(data){
         console.log(data);
-        postData('/add', {date:d, temperature:data.temperature, comments: data.comments});
+        postData('/add', {date:newDate, temperature:data.list[0].main.temp, comments: feelings});
         updateUI();
     })
 };
 
-/* Function to GET Web API Data*/
+// Function to GET Web API Data (Get Route II)
 const getData = async (baseURL, location, apiKey)=>{
 
   // http://127.0.0.1:5500/Projects/Weather-Journal-App/website/api.openweathermap.org/data/2.5/weather/V6B1B47/6aa91139c7537d1992cc3e86268bd28
-    const res = await fetch(baseURL+location+apiKey)
+    const res = await fetch(baseURL+location,country+apiKey)
     try {
   
       const Data = await res.json();
-      console.log(Data)
+      console.log(Data);
       return Data;
     }  catch(error) {
       console.log("error", error);
@@ -49,11 +49,7 @@ const postData = async (url = '', Data = {}) =>{
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(
-      temperature = Data.temperature, 
-      date= Data.date, 
-      comments= Data.comments
-    )
+    body: JSON.stringify(data),
   });
   try {
   
@@ -67,16 +63,19 @@ const postData = async (url = '', Data = {}) =>{
 }
 
 /* Function to GET Project Data */
-const updateUI = async () => {
-const request = await fetch('/all')
-try{
-  const allData = await request. json()
-  console. log(allData);
-  document.getElementById('date').innerHTML=allData[0].date;
-  document.getElementById('temperature').innerHTML=allData[0].temperature;
-  document.getElementById('comments'). innerHTML = allData[0]. comments;
-
-  }catch(error){
-    console. log("error", error)
+const retrieveData = async () =>{
+  const request = await fetch('/all');
+  try {
+  // Transform into JSON
+    const allData = await request.json()
+    console.log(allData)
+  // Write updated data to DOM elements
+    document.getElementById('temp').innerHTML = Math.round(allData.temp)+ 'degrees';
+    document.getElementById('content').innerHTML = allData.feel;
+    document.getElementById('date').innerHTML =allData.date;
+  }
+  catch(error) {
+    console.log("error", error);
+    // appropriately handle the error
   }
 }
