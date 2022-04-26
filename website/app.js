@@ -4,7 +4,7 @@ let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
 
 
 // Personal API Key for OpenWeatherMap API
-let baseURL = 'api.openweathermap.org/data/2.5/weather/?zip=';
+const baseURL = 'api.openweathermap.org/data/2.5/weather/?zip=';
 const apiKey = '&appID=76aa91139c7537d1992cc3e86268bd28';
 
 // Event listener to add function to existing HTML DOM element
@@ -26,7 +26,7 @@ function taskToPerform(e){
 };
 
 // Function to GET Web API Data (Get Route II)
-const getData = async (baseURL, location, apiKey)=>{
+const getData = async (baseURL, location,country, apiKey)=>{
 
   // http://127.0.0.1:5500/Projects/Weather-Journal-App/website/api.openweathermap.org/data/2.5/weather/V6B1B47/6aa91139c7537d1992cc3e86268bd28
     const res = await fetch(baseURL+location,country+apiKey)
@@ -71,7 +71,7 @@ const retrieveData = async () =>{
     console.log(allData)
   // Write updated data to DOM elements
     document.getElementById('temp').innerHTML = Math.round(allData.temp)+ 'degrees';
-    document.getElementById('content').innerHTML = allData.feel;
+    document.getElementById('content').innerHTML = allData.feelings;
     document.getElementById('date').innerHTML =allData.date;
   }
   catch(error) {

@@ -113,7 +113,7 @@ textarea:focus{
 
 
 /* Recent search------------------ */
-.recent{
+.entryHolder{
     display: block;
     background: #D8D8F6;
     color: #2C2C34;
