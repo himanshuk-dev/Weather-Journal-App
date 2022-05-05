@@ -11,7 +11,7 @@ const apiKey = '&appID=76aa91139c7537d1992cc3e86268bd28';
 document.getElementById("generate").addEventListener('click', taskToPerform);
 
 /* Function called by event listener */
-function taskToPerform(e){
+function taskToPerform(){
   const location =  document.getElementById('zip').value;
   const country =  document.getElementById('country').value;
   const comments =  document.getElementById('feelings').value;
@@ -19,23 +19,21 @@ function taskToPerform(e){
   getData(baseURL,location,country,apiKey)
 
   .then((data) =>{
+    console.log("The data is:", data);
+    console.log("The temperature is:", data.main.temp)
+    console.log("The feelings are:", comments)
+    console.log("The date is:", newDate)
     holdData(data)
     .then((information)=>{
-      postData('/sendData',information)
+      postData('http://localhost:5000/sendData',information)
       .then((data)=>{
-        obtainData('/retreiveData');
+        obtainData('http://localhost:5000/retreiveData')
+        .then((data)=>{
+          updateUI(data);
+        })
       })
-    });
+    })
   });
-
-    // .then(function(data){
-    //     console.log("The data is:", data);
-    //     console.log("The temperature is:", data.main.temp)
-    //     console.log("The feelings are:", comments)
-    //     console.log("The date is:", newDate)
-    //     postData('/create', {date:newDate, temperature:data.main.temp, comments: feelings})
-    //     updateUI();
-    // })
 };
 
 // Function to GET Web API Data (Get Route II)
@@ -67,8 +65,8 @@ const holdData = async (data) =>{
   try{
     if(data.message){
       const information = data.message;
-      console.log(information);
-      return information;
+      console.log(data.message);
+      return data.message;
     }
   }catch(error){
     console.error(error);
@@ -79,6 +77,7 @@ const holdData = async (data) =>{
 const postData = async (url = '', data = {}) =>{
   console.log("The url in he post is:", url)
   try {
+    console.log('fetch called:', fetch)
     const res = await fetch(url, {
       method: 'POST',
       credentials: 'same-origin',
@@ -87,6 +86,7 @@ const postData = async (url = '', data = {}) =>{
       },
       body: JSON.stringify(data),
     });
+    console.log('fetch call completed',fetch)
     return res;
   }  catch(error) {
     console.log("error", error);
@@ -99,7 +99,7 @@ const obtainData = async(url) =>{
   const data = await fetch(url)
   console.log("Fetch call completed")
     try {
-      const result = await res.json();
+      const result = await data.json();
       console.log(result);
       return result;
     }  catch(error) {
@@ -108,8 +108,8 @@ const obtainData = async(url) =>{
     }
 }
 
-const updateUI = async () =>{
-  const request = await fetch('/all');
+const updateUI = async (data) =>{
+  const request = await fetch('http://localhost:5000/retreiveData');
   try {
   // Transform into JSON
     const allData = await request.json()
