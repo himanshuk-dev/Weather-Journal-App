@@ -1,3 +1,5 @@
+const { url } = require("inspector");
+
 // Create a new date instance dynamically with JS
 let d = new Date();
 let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
@@ -18,14 +20,24 @@ function taskToPerform(e){
 
   getData(baseURL,location,country,apiKey)
 
-    .then(function(data){
-        console.log("The data is:", data);
-        console.log("The temperature is:", data.main.temp)
-        console.log("The feelings are:", feelings)
-        console.log("The date is:", newDate)
-        postData('/add', {date:newDate, temperature:data.main.temp, comments: feelings})
-        updateUI();
-    })
+  .then((data) =>{
+    holdData(data)
+    .then((information)=>{
+      postData('/create',information)
+      .then((data)=>{
+        obtainData('/all');
+      })
+    });
+  });
+
+    // .then(function(data){
+    //     console.log("The data is:", data);
+    //     console.log("The temperature is:", data.main.temp)
+    //     console.log("The feelings are:", comments)
+    //     console.log("The date is:", newDate)
+    //     postData('/create', {date:newDate, temperature:data.main.temp, comments: feelings})
+    //     updateUI();
+    // })
 };
 
 // Function to GET Web API Data (Get Route II)
@@ -52,6 +64,19 @@ const getData = async (baseURL,location,country,apiKey)=>{
     }
   }
 
+// Function to store data
+const holdData = async (data) =>{
+  try{
+    if(data.message){
+      const information = data.message;
+      console.log(information);
+      return information;
+    }
+  }catch(error){
+    console.error(error);
+  }
+}
+
 /* Function to POST data */
 const postData = async (url = '', data = {}) =>{
   console.log("The url in he post is:", url)
@@ -75,6 +100,20 @@ const postData = async (url = '', data = {}) =>{
 }
 
 /* Function to GET Project Data */
+const obtainData = async(url) =>{
+  const data = await fetch(url)
+  console.log("Fetch call completed")
+    try {
+      const result = await res.json();
+      console.log(result);
+      return result;
+    }  catch(error) {
+      console.log("error", error);
+      // appropriately handle the error
+    }
+}
+
+
 const updateUI = async () =>{
   const request = await fetch('/all');
   try {

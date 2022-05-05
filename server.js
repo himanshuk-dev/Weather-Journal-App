@@ -1,3 +1,5 @@
+const projectData = {};
+
 // Express to run server and routes
 const express = require('express');
 
@@ -33,20 +35,21 @@ app.get('/all',getData);
 
 function getData(req,res) {
   res.send(projectData);
-  projectData=[];
 }
 
 // Post weather data
-app.post('/projectData', addEntry)
+app.post('/create', addEntry)
 
-function addEntry(req,res){
-
-    newEntry = {
-      date: req.body.date,
-      temperature: req.body.temperature,
-      comments: req.body.comments
-    }
+async function addEntry(req,res){
+  const body = await req.body;
+  projectData = body;
   
-    projectData.push(newEntry)
-    console.log(addEntry)
+    // newEntry = {
+    //   date: req.body.date,
+    //   temperature: req.body.temperature,
+    //   comments: req.body.comments
+    // }
+  
+    // projectData.push(newEntry)
+    // console.log(addEntry)
   }
