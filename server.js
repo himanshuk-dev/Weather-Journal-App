@@ -31,25 +31,17 @@ function listening(){
 }
 
 // Capture weather data (Get Route I)
-app.get('/all',getData);
+app.get('/retreiveData',retreiveData);
 
-function getData(req,res) {
+function retreiveData(req,res) {
   res.send(projectData);
 }
 
 // Post weather data
-app.post('/create', addEntry)
-
-async function addEntry(req,res){
-  const body = await req.body;
-  projectData = body;
-  
-    // newEntry = {
-    //   date: req.body.date,
-    //   temperature: req.body.temperature,
-    //   comments: req.body.comments
-    // }
-  
-    // projectData.push(newEntry)
-    // console.log(addEntry)
+app.post('/sendData', sendData)
+async function sendData(req,res){
+  console.log('received data from client', req);
+  const data = await req.body;
+  projectData = data;
+  res.status(200);
   }

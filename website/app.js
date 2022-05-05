@@ -1,5 +1,3 @@
-const { url } = require("inspector");
-
 // Create a new date instance dynamically with JS
 let d = new Date();
 let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
@@ -23,9 +21,9 @@ function taskToPerform(e){
   .then((data) =>{
     holdData(data)
     .then((information)=>{
-      postData('/create',information)
+      postData('/sendData',information)
       .then((data)=>{
-        obtainData('/all');
+        obtainData('/retreiveData');
       })
     });
   });
@@ -80,19 +78,16 @@ const holdData = async (data) =>{
 /* Function to POST data */
 const postData = async (url = '', data = {}) =>{
   console.log("The url in he post is:", url)
-  const res = await fetch(url, {
-    method: 'POST',
-    credentials: 'same-origin',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  });
   try {
-  
-    const newData = await res.json();
-    console.log(newData)
-    return newData;
+    const res = await fetch(url, {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+    return res;
   }  catch(error) {
     console.log("error", error);
     // appropriately handle the error
@@ -112,7 +107,6 @@ const obtainData = async(url) =>{
       // appropriately handle the error
     }
 }
-
 
 const updateUI = async () =>{
   const request = await fetch('/all');
