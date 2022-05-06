@@ -40,8 +40,9 @@ function retreiveData(req,res) {
 // Post weather data
 app.post('/sendData', sendData)
 async function sendData(req,res){
-  console.log('received data from client', req);
+  console.log('Received data from client, data:', req.body);
   const data = await req.body;
-  projectData = data;
-  res.status(200);
-  }
+  // projectData = data;
+  console.log('Sending response status code to client');
+  res.status(200).send();
+}
