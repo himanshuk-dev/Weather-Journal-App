@@ -1,4 +1,8 @@
-const projectData = {};
+const projectData = {
+  temp: "",
+  userResponse:"",
+  date:""
+};
 
 // Express to run server and routes
 const express = require('express');
@@ -34,15 +38,20 @@ function listening(){
 app.get('/retreiveData',retreiveData);
 
 function retreiveData(req,res) {
+  console.log('Data being sent:', projectData)
   res.send(projectData);
+
 }
 
 // Post weather data
 app.post('/sendData', sendData)
 async function sendData(req,res){
   console.log('Received data from client, data:', req.body);
+  projectData.temp = req.body.temp;
+  projectData.userResponse = req.body.userResponse;
+  projectData.date = req.body.date;
+  console.log('data assigned at post route:', projectData)
   const data = await req.body;
-  // projectData = data;
   console.log('Sending response status code to client');
   res.status(200).send();
 }

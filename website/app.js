@@ -31,12 +31,18 @@ function taskToPerform(){
       console.log('Data prepared to be sent to server:', projectData)
       postData(localhostServerURL + '/sendData', projectData)
       .then((responseData)=>{
-        console.log('Retreived response data is:', responseData)
-        obtainData('http://localhost:5000/retreiveData')
-        .then((data)=>{
-          // console.log('UI data is:', data)
-          updateUI(data);
-        })
+        console.log('Response from server:', responseData)
+        if(responseData.status == 200){
+          retrieveData(localhostServerURL + '/retreiveData')
+          .then((uiData)=>{
+            console.log('Data to be displayed in UI:', uiData)
+            updateUI(uiData);
+          })
+        } else{
+          // Displaying in UI that there was some error.
+          console.log("error in the api call");
+        }
+   
       })
     })
   });
@@ -109,13 +115,12 @@ const postData = async (url = '', projectData = {}) =>{
 }
 
 /* Function to GET Project Data */
-const obtainData = async(url) =>{
-  console.log("getting data from local server:",fetch)
+const retrieveData = async(url) =>{
+  console.log("retrieveData called with url:", url)
   const data = await fetch(url)
-  console.log("Fetch call completed")
     try {
       const result = await data.json();
-      console.log(result);
+      console.log('Data received from server through /retrieveData route:',result);
       return result;
     }  catch(error) {
       console.log("error", error);
@@ -123,16 +128,16 @@ const obtainData = async(url) =>{
     }
 }
 
-const updateUI = async (data) =>{
+const updateUI = async (uiData) =>{
   const request = await fetch('http://localhost:5000/retreiveData');
   try {
   // Transform into JSON
-    const allData = await request.json()
-    console.log(allData)
+    const uiData = await request.json()
+    console.log('updateUI called with:', uiData)
   // Write updated data to DOM elements
-    document.getElementById('temp').innerHTML = Math.round(allData.temp)+ 'degrees';
-    document.getElementById('content').innerHTML = allData.feelings;
-    document.getElementById('date').innerHTML =allData.date;
+    document.getElementById('temp').innerHTML = uiData.temp;
+    document.getElementById('comments').innerHTML = uiData.userResponse;
+    document.getElementById('date').innerHTML =uiData.date;
   }
   catch(error) {
     console.log("error", error);
