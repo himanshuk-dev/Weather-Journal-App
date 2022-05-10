@@ -81,7 +81,7 @@ textarea:focus{
 /* App header---------------------- */
 .head{
     display: block;
-    padding: 2%;
+    padding: 1%;
     text-align: center;
     background:#494850;
     /* text-shadow: 0 0 10px #978897; */
@@ -99,19 +99,6 @@ textarea:focus{
     color: #2C2C34;
 }
 
-
-/* Comments area------------------ */
-/* .comments{
-    display: block;
-    background: #A37B73;
-    color: #2C2C34;
-    padding: 3%;
-    margin: 50px;
-    margin-top: 0;
-    text-align: right;
-} */
-
-
 /* Recent search------------------ */
 .entryHolder{
     display: inline-block;
@@ -121,4 +108,18 @@ textarea:focus{
     padding: 1%;
     margin: 20px;
     margin-top: auto;
+}
+
+/* UI data to be displayed ----------------*/
+
+/* Comments area*/
+#userResponse, #temperature, #date {
+    display: inline-block;
+    background: #D8DDDE;
+    color: #2C2C34;
+    padding: 0.5%;
+    font-size: 20px;
+    margin: 25px;
+    margin-top: 0;
+    text-align: right;
 }
