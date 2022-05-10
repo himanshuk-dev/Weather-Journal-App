@@ -11,29 +11,27 @@
         <div class="head">
             Weather Journal App
         </div>
-        <div class="location">
-            <label>Look for Weather Data by Zipcode:</label>
-            <input type="text" id="zip" placeholder="Enter zipcode here">
-            <div class="country">
-                <label for="country">Enter Country code:</label>
-                <input type="text" id="country" placeholder="country code here" minlength="2" maxlength="2">
-                <p class="hint">Enter two-letter country codes like Au for Australia, for more <a href="https://en.wikipedia.org/wiki/ISO_3166-1">click here</a> </p>
-              </div>
-        </div>
-        <div class="comments">
-            <label>What made you smile today?</label>
-            <textarea id="feelings" placeholder="Enter your comments here" rows="9" cols="50"></textarea>
-            <button id="generate" type = "submit"> Go </button>
-        </div>
-        <div>
-            <div class="entryHolder">
-                Recent Search
-                <div>
-                    <div id = "date"></div> 
-                    <div id = "temperature"></div>
-                    <div id = "comments"></div>
+        <div class="contain">
+            <div>
+                <label>Enter Zipcode:</label>
+                <input type="text" id="zip" placeholder="Enter zipcode here">
+                <div class="country">
+                    <label for="country">Enter Country code:</label>
+                    <input type="text" id="country" placeholder="country code here" minlength="2" maxlength="2">
+                    <p class="hint">Enter two-letter country codes like Au for Australia, for more <a href="https://en.wikipedia.org/wiki/ISO_3166-1">click here</a> </p>
                 </div>
             </div>
+            <div>
+                <label>What made you smile today?</label>
+                <textarea id="feelings" placeholder="Enter your comments here" rows="9" cols="50"></textarea>
+                <button id="generate" type = "submit"> Go </button>
+            </div>
+        </div>
+        <div class="entryHolder">
+            Recent Search
+            <div>Date: <p id = "date">temp date</p> </div> 
+            <div>Temperature: <p id = "temperature">temp temperature</p> </div>
+            <div>User Response: <p id = "userResponse">temp user response</p> </div>
         </div>
         <script src="app.js" type="text/javascript"></script>
     </body>

@@ -26,7 +26,7 @@ app.use(cors());
 app.use(express.static("website"));
 
 // Setup the server
-const port = 5000;
+const port = 8888;
 const server = app.listen(port, listening);
 
 function listening(){

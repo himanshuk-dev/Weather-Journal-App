@@ -1,14 +1,13 @@
-// Global Variable
-
 // Create a new date instance dynamically with JS
-let d = new Date();
-let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
+let today = new Date();
+let newDate = today.getFullYear() + '-' +(today.getMonth()+1 )+ '-' + today.getDate();
+console.log("Date is:", newDate);
 
 
 // Personal API Key for OpenWeatherMap API
 const weatherServerURL = 'https://api.openweathermap.org/data/2.5/weather/?zip=';
 const apiKey = '&appID=76aa91139c7537d1992cc3e86268bd28';
-const localhostServerURL = 'http://localhost:5000';
+const localhostServerURL = 'http://localhost:8888';
 
 // Event listener to add function to existing HTML DOM element
 document.getElementById("generate").addEventListener('click', taskToPerform);
@@ -129,15 +128,15 @@ const retrieveData = async(url) =>{
 }
 
 const updateUI = async (uiData) =>{
-  const request = await fetch('http://localhost:5000/retreiveData');
+  const request = await fetch('http://localhost:8888/retreiveData');
   try {
   // Transform into JSON
     const uiData = await request.json()
     console.log('updateUI called with:', uiData)
   // Write updated data to DOM elements
-    document.getElementById('temp').innerHTML = uiData.temp;
-    document.getElementById('comments').innerHTML = uiData.userResponse;
-    document.getElementById('date').innerHTML =uiData.date;
+    document.getElementById('date').innerHTML = uiData.date;
+    document.getElementById('temperature').innerHTML = uiData.temp;
+    document.getElementById('userResponse').innerHTML = uiData.userResponse
   }
   catch(error) {
     console.log("error", error);
