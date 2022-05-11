@@ -27,11 +27,7 @@ I developed this project to demonstrate my skills for webAPIs, ES6, Node.js.
 
 
 
-
-
-https://user-images.githubusercontent.com/87880250/167710318-ebfc7fee-3621-4d1c-b22e-471c49f1745b.mov
-
-
+https://user-images.githubusercontent.com/87880250/167778630-7eaea1ee-a538-48a0-a17c-372654d864bb.mov
 
 
 
