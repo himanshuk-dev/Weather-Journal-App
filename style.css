@@ -13,7 +13,7 @@ Gainsboro: #D8DDDE
 body{
     display: grid;
     /* row-gap: 1%; */
-    background: url(images/background1.jpg);
+    background: url(background1.jpg);
     background-size: contain;
     color: #D8D8F6;
     font-size: 3em;
