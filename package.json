@@ -1,0 +1,25 @@
+{
+  "name": "weather-journal-app",
+  "version": "1.0.0",
+  "description": "![Landing page banner](https://user-images.githubusercontent.com/87880250/167685039-46045978-71ac-4aca-bfe2-b9a786224398.png)",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/coderhimanshu1/Weather-Journal-App.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/coderhimanshu1/Weather-Journal-App/issues"
+  },
+  "homepage": "https://github.com/coderhimanshu1/Weather-Journal-App#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "express": "^4.18.2"
+  }
+}
