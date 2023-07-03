@@ -56,8 +56,9 @@ const getWeatherDataByZipcode = async (
     zipcode +
     "," +
     countryCode +
-    "&appID=" +
+    "&appid=" +
     apiKey;
+
   const response = await fetch(url);
   try {
     const weatherData = await response.json();
