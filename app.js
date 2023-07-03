@@ -141,6 +141,4 @@ const updateUI = async (uiData) => {
     // appropriately handle the error
   }
 };
-© 2022 GitHub, Inc.
-Terms
-Privacy
+
