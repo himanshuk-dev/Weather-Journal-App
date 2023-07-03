@@ -9,36 +9,43 @@ const localhostServerURL = "http://localhost:8888";
 const postMethodName = "/sendData";
 const getMethodName = "/retreiveData";
 
-// Event listener to add function to existing HTML DOM element
-document
-  .getElementById("generate")
-  .addEventListener("click", fetchWeatherDataAndDisplay);
+document.addEventListener("DOMContentLoaded", () => {
+  // Event listener to add function to existing HTML DOM element
+  document
+    .getElementById("generate")
+    .addEventListener("click", fetchWeatherDataAndDisplay);
+});
 
 /* Function called by event listener */
 function fetchWeatherDataAndDisplay() {
+  // Capture current date at the time of function call
+  let today = new Date();
+  let newDate = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+
   const zipcode = document.getElementById("zip").value;
   const countryCode = document.getElementById("countryCode").value;
   const userResponse = document.getElementById("feelings").value;
 
-  getWeatherDataByZipcode(weatherServerURL, zipcode, countryCode, apiKey).then(
-    (weatherData) => {
-      prepareData(weatherData, userResponse).then((projectData) => {
-        postData(localhostServerURL + postMethodName, projectData).then(
-          (responseData) => {
-            if (responseData.status == 200) {
-              retrieveData(localhostServerURL + getMethodName).then(
-                (uiData) => {
-                  updateUI(uiData);
-                }
-              );
-            } else {
-              console.log("Error sending data to local server.");
-            }
-          }
-        );
-      });
-    }
-  );
+  getWeatherDataByZipcode(weatherServerURL, zipcode, countryCode, apiKey)
+    .then((weatherData) => {
+      return prepareData(weatherData, userResponse);
+    })
+    .then((projectData) => {
+      return postData(localhostServerURL + postMethodName, projectData);
+    })
+    .then((responseData) => {
+      if (responseData.status === 200) {
+        return retrieveData(localhostServerURL + getMethodName);
+      } else {
+        console.log("Error sending data to local server.");
+      }
+    })
+    .then((uiData) => {
+      updateUI(uiData);
+    })
+    .catch((error) => {
+      console.error("An error occurred:", error);
+    });
 }
 
 /**
@@ -53,19 +60,17 @@ const getWeatherDataByZipcode = async (
   const url =
     weatherServerURL +
     "?zip=" +
-    zipcode +
+    encodeURIComponent(zipcode) +
     "," +
-    countryCode +
+    encodeURIComponent(countryCode) +
     "&appid=" +
     apiKey;
-
-  const response = await fetch(url);
   try {
+    const response = await fetch(url);
     const weatherData = await response.json();
     return weatherData;
   } catch (error) {
-    console.log("error", error);
-    // appropriately handle the error
+    console.error("error", error);
   }
 };
 
