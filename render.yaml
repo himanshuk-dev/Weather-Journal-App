@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: Weather-Journal-app
+    env: node
+    buildCommand: npm install
+    startCommand: node server.js
