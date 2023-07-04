@@ -23,7 +23,7 @@ app.use(cors());
 
 // Initialize the main project folder
 app.get("/", function (req, res) {
-  res.sendFile(__dirname + "index.html");
+  res.sendFile(__dirname + "/index.html");
 });
 
 // Setup the server
