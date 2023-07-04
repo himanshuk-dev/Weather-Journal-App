@@ -26,6 +26,8 @@ app.get("/", function (req, res) {
   res.sendFile(__dirname + "/index.html");
 });
 
+app.use(express.static(path.join(__dirname, "public")));
+
 // Setup the server
 const port = 8888;
 const server = app.listen(port, listening);
