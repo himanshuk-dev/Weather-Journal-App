@@ -4,6 +4,8 @@ const projectData = {
   date: "",
 };
 
+const path = require("path");
+
 // Express to run server and routes
 const express = require("express");
 
