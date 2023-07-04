@@ -22,7 +22,9 @@ const cors = require("cors");
 app.use(cors());
 
 // Initialize the main project folder
-app.use(express.static("website"));
+app.get("/", function (req, res) {
+  res.sendFile(__dirname + "index.html");
+});
 
 // Setup the server
 const port = 8888;
@@ -41,7 +43,7 @@ app.post("/sendData", storeData);
 /**
  * Get route to send data back to the client (Get Route I)
  */
- app.get("/retreiveData", retreiveData);
+app.get("/retreiveData", retreiveData);
 
 /**
  * Function to store data coming from the client and responding with statusCode
